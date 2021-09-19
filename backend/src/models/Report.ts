@@ -25,6 +25,7 @@ class Report {
     updated_at: Date;
 
     @ManyToOne(() => Patrimonio, patrimonio => patrimonio.reports)
+    @JoinColumn({ name: 'patrimonio_id' })
     patrimonio: Patrimonio
 
     constructor() {

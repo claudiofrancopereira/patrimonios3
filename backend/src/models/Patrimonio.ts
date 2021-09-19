@@ -30,6 +30,7 @@ class Patrimonio {
     updated_at: Date;
 
     @OneToMany(() => Report, report => report.patrimonio)
+    @JoinColumn({ name: 'patrimonio_id' })
     reports: Report[]
 
     constructor() {

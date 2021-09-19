@@ -20,7 +20,7 @@ export class createReports1631581087097 implements MigrationInterface {
           type: 'text',
         },
         {
-          name: 'patrimonioId',
+          name: 'patrimonio_id',
           type: 'uuid',
         },
         {
@@ -44,7 +44,7 @@ export class createReports1631581087097 implements MigrationInterface {
       foreignKeys: [
         {
           name: 'ReportPatrimonio',
-          columnNames: ['patrimonioId'],
+          columnNames: ['patrimonio_id'],
           referencedTableName: 'patrimonios',
           referencedColumnNames: ['id'],
           onUpdate: 'CASCADE',

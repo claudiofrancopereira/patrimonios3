@@ -7,8 +7,6 @@ export default {
         const reportsRepository = getRepository(Report);
         const patrimonio = request.params;
 
-        console.log(patrimonio);
-        
         const {
             description,
             outcome,
