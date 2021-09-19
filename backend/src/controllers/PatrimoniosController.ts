@@ -26,6 +26,16 @@ export default {
 
         return response.status(201).json(patrimonio);
 
+    },
+
+    async index(request: Request, response: Response) {
+        const patrimoniosRepository = getRepository(Patrimonio);
+
+        const patrimonios = await patrimoniosRepository.find({
+            relations: ['reports']
+        });
+
+        return response.json(patrimonios)
     }
 }
 

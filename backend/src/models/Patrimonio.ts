@@ -29,7 +29,9 @@ class Patrimonio {
     @CreateDateColumn()
     updated_at: Date;
 
-    @OneToMany(() => Report, report => report.patrimonio)
+    @OneToMany(() => Report, report => report.patrimonio, {
+        cascade: ['insert', 'update']
+    })
     @JoinColumn({ name: 'patrimonio_id' })
     reports: Report[]
 
