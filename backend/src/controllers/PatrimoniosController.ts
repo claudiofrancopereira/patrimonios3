@@ -14,12 +14,18 @@ export default {
             notes,
         } = request.body
 
+        const requestImages = request.files as Express.Multer.File[];
+        const images = requestImages.map(image => {
+            return { path: image.filename }
+        });
+
         const patrimonio = patrimoniosRepository.create({
             nome,
             endereco,
             latitude,
             longitude,
-            notes
+            notes,
+            images,
         });
 
         await patrimoniosRepository.save(patrimonio);
@@ -32,7 +38,7 @@ export default {
         const patrimoniosRepository = getRepository(Patrimonio);
 
         const patrimonios = await patrimoniosRepository.find({
-            relations: ['reports']
+            relations: ['images', 'reports', 'reports.images' ]
         });
 
         return response.json(patrimonios)

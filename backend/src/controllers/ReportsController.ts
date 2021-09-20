@@ -13,12 +13,17 @@ export default {
             opened,
         } = request.body
 
+        const requestImages = request.files as Express.Multer.File[];
+        const images = requestImages.map(image => {
+            return { path: image.filename }
+        });
+
         const report = reportsRepository.create({
             description,
             outcome,
             opened,
-            patrimonio
-            
+            patrimonio,
+            images
         });
 
         await reportsRepository.save(report);

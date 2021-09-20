@@ -1,6 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, PrimaryColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm'
 
 import { Patrimonio } from '../models/Patrimonio';
+import { ReportImage } from './reportImage';
 
 import { v4 } from 'uuid'
 
@@ -27,6 +28,12 @@ class Report {
     @ManyToOne(() => Patrimonio, patrimonio => patrimonio.reports)
     @JoinColumn({ name: 'patrimonio_id' })
     patrimonio: Patrimonio
+
+    @OneToMany(() => ReportImage, image => image.report, {
+        cascade: ['insert', 'update']
+    })
+    @JoinColumn({ name: 'report_id' })
+    images: ReportImage[];
 
     constructor() {
         if (!this.id) {

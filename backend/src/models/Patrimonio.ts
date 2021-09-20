@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn, OneToMany, JoinColumn } from 'typeorm'
-import { Report } from '../models/Report';
 
+import { Report } from '../models/Report';
+import { PatrimonioImage } from './patrimonioImage'
 import { v4 } from 'uuid'
 
 @Entity('patrimonios')
@@ -34,6 +35,12 @@ class Patrimonio {
     })
     @JoinColumn({ name: 'patrimonio_id' })
     reports: Report[]
+
+    @OneToMany(() => PatrimonioImage, image => image.patrimonio, {
+        cascade: ['insert', 'update']
+    })
+    @JoinColumn({ name: 'patrimonio_id' })
+    images: PatrimonioImage[];
 
     constructor() {
         if (!this.id) {
